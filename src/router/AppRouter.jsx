@@ -20,17 +20,21 @@ export const AppRouter = () => {
               <Navbar />
               <Routes>
                 <Route
-                  path='characters/*'
+                  path='characters'
+                  element={<Navigate to='/characters/page/1' />}
+                />
+                <Route
+                  path='characters/page/:page'
                   element={<CharactersRoutes />}
                 />
                 <Route
                   path='locations/*'
                   element={<LocationRoutes />}
                 />
-                <Route path='Search' element={<SearchPage />} />
+                <Route path='search' element={<SearchPage />} />
                 <Route
                   path='*'
-                  element={<Navigate to='/characters' />}
+                  element={<Navigate to='/characters/page/1' />}
                 />
               </Routes>
             </>

@@ -8,14 +8,14 @@ export const Navbar = () => {
   };
 
   return (
-    <div className='navbar bg-base-100 shadow-sm '>
+    <div className='navbar bg-base-100 shadow-sm px-8'>
       <div className='navbar-start '>
         <Link to='/' className='text-xl font-bold'>
           Rick&Morty
         </Link>
       </div>
 
-      <div className='flex navbar-center gap-6 '>
+      <div className='flex navbar-end gap-6 '>
         <NavLink
           to='/characters'
           className={({ isActive }) =>
@@ -42,7 +42,7 @@ export const Navbar = () => {
         </NavLink>
       </div>
 
-      <div className='navbar-end flex items-center gap-4 '>
+      {/* <div className='navbar-end flex items-center gap-4 '>
         <NavLink to='/login' className='btn btn-primary'>
           Login
         </NavLink>
@@ -50,7 +50,7 @@ export const Navbar = () => {
         <button onClick={handleLogout} className='btn btn-ghost'>
           Logout
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

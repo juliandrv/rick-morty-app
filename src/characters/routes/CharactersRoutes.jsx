@@ -7,6 +7,7 @@ export const CharactersRoutes = () => {
     <>
       <Routes>
         <Route path='/' element={<CharactersListPage />} />
+        <Route path='/page/:page' element={<CharactersListPage />} />
         <Route path=':id' element={<CharacterDetailPage />} />
       </Routes>
     </>

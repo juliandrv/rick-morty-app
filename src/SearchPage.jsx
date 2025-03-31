@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 import { useForm } from './hooks/useForm';
 import { useFetch } from './hooks/useFetch';
 import { memo, useMemo } from 'react';
@@ -64,45 +64,42 @@ export const SearchPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Memoize query parsing
-  const q = useMemo(() => {
-    const query = new URLSearchParams(location.search);
-    return query.get('q') || '';
+  // Parse query parameters
+  const queryParams = useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    return {
+      q: params.get('q') || '',
+      page: parseInt(params.get('page')) || 1,
+    };
   }, [location.search]);
 
   // Memoize API URL
   const apiUrl = useMemo(
     () =>
-      q
-        ? `https://rickandmortyapi.com/api/character/?name=${q}`
+      queryParams.q
+        ? `https://rickandmortyapi.com/api/character/?name=${queryParams.q}&page=${queryParams.page}`
         : null,
-    [q]
+    [queryParams.q, queryParams.page]
   );
 
-  // Use the useFetch hook with the memoized URL
   const { data, isLoading, hasError } = useFetch(apiUrl);
 
   const { searchText, onInputChange, onResetForm } = useForm({
     searchText: '',
   });
 
-  // Memoize the submit handler
-  const onSearchSubmit = useMemo(
-    () => (event) => {
-      event.preventDefault();
-      if (searchText.trim().length <= 1) return;
+  const handlePageChange = (newPage) => {
+    navigate(`?q=${queryParams.q}&page=${newPage}`);
+  };
 
-      navigate(`?q=${searchText.toLowerCase().trim()}`);
-      onResetForm();
-    },
-    [searchText, navigate, onResetForm]
-  );
+  const onSearchSubmit = (event) => {
+    event.preventDefault();
+    if (searchText.trim().length <= 1) return;
 
-  // Memoize the results message
-  const resultsMessage = useMemo(() => {
-    if (!data?.results) return null;
-    return `${data.results.length} results for "${q}"`;
-  }, [data?.results, q]);
+    // Reset to page 1 when performing a new search
+    navigate(`?q=${searchText.toLowerCase().trim()}&page=1`);
+    onResetForm();
+  };
 
   return (
     <section className='container mx-auto px-4'>
@@ -136,7 +133,9 @@ export const SearchPage = () => {
           <div role='alert' className='alert alert-success mb-6'>
             <SuccessIcon />
             <span>
-              <b>{resultsMessage}</b>
+              <b>
+                {data.info.count} results for "{queryParams.q}"
+              </b>
             </span>
           </div>
         )}
@@ -145,16 +144,18 @@ export const SearchPage = () => {
           <div role='alert' className='alert alert-error'>
             <ErrorIcon />
             <span>
-              0 results for <b>"{q}"</b>. Try again
+              0 results for <b>"{queryParams.q}"</b>. Try again
             </span>
           </div>
         )}
 
-        {data && q && (
+        {data && queryParams.q && (
           <MemoizedListLayout
             data={data}
             isLoading={isLoading}
             hasError={hasError}
+            currentPage={queryParams.page}
+            onPageChange={handlePageChange}
           />
         )}
       </div>
