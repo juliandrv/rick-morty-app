@@ -138,7 +138,7 @@ export const SearchPage = () => {
           </div>
         )}
 
-        {!isLoading && hasError && (
+        {queryParams.q && !isLoading && hasError && (
           <div role='alert' className='alert alert-error'>
             <ErrorIcon />
             <span>
