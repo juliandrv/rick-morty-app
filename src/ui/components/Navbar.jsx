@@ -11,7 +11,7 @@ export const Navbar = () => {
     <div className='navbar bg-base-100 shadow-sm px-8'>
       <div className='navbar-start '>
         <Link to='/' className='text-xl font-bold'>
-          Rick&Morty
+          Morty&Rick
         </Link>
       </div>
 
