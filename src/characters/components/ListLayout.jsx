@@ -27,22 +27,22 @@ export const ListLayout = ({
       </div>
 
       {/* Unified Pagination Component */}
-      {info && (
+      {info && info.pages > 1 && (
         <div className='join flex justify-center mt-8'>
           <button
-            className='join-item btn'
+            className='join-item btn btn-primary'
             onClick={() => onPageChange(currentPage - 1)}
             disabled={!info.prev}
           >
             «
           </button>
 
-          <button className='join-item btn'>
+          <button className='join-item btn pointer-events-none'>
             Page {currentPage} of {info.pages}
           </button>
 
           <button
-            className='join-item btn'
+            className='join-item btn btn-primary'
             onClick={() => onPageChange(currentPage + 1)}
             disabled={!info.next}
           >

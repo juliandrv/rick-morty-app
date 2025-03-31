@@ -42,8 +42,16 @@ export const CharacterDetailPage = () => {
                 <h2 className='card-title text-2xl'>{data.name}</h2>
               </div>
 
-              <span>
-                <b>Status: </b> {data.status}
+              <span
+                className={`badge ${
+                  data.status === 'Alive'
+                    ? 'badge-success'
+                    : data.status === 'Dead'
+                    ? 'badge-error'
+                    : 'badge-warning'
+                }`}
+              >
+                {data.status}
               </span>
               <span>
                 <b>Species: </b> {data.species}

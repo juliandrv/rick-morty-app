@@ -102,7 +102,7 @@ export const SearchPage = () => {
   };
 
   return (
-    <section className='container mx-auto px-4'>
+    <section className='container mx-auto px-4 flex flex-col items-center justify-center animate__animated animate__fadeIn'>
       <h1 className='text-center font-bold text-3xl my-8'>
         Find a character
       </h1>
@@ -128,14 +128,12 @@ export const SearchPage = () => {
         </button>
       </form>
 
-      <div className='mt-8'>
+      <div className='mt-8 w-full'>
         {!isLoading && !hasError && data?.results && (
           <div role='alert' className='alert alert-success mb-6'>
             <SuccessIcon />
             <span>
-              <b>
-                {data.info.count} results for "{queryParams.q}"
-              </b>
+              {data.info.count} results for <b>"{queryParams.q}"</b>
             </span>
           </div>
         )}

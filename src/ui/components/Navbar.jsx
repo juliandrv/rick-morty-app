@@ -32,6 +32,7 @@ export const Navbar = () => {
         >
           Locations
         </NavLink>
+
         <NavLink
           to='/search'
           className={({ isActive }) =>
