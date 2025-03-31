@@ -3,7 +3,7 @@ import { LoginPage } from '../auth/LoginPage';
 import { CharactersRoutes } from '../characters/routes/CharactersRoutes';
 import { LocationRoutes } from '../locations/routes/LocationRoutes';
 import { Navbar } from '../ui/components/Navbar';
-import { AboutPage } from '../AboutPage';
+import { SearchPage } from '../SearchPage';
 
 export const AppRouter = () => {
   return (
@@ -27,7 +27,7 @@ export const AppRouter = () => {
                   path='locations/*'
                   element={<LocationRoutes />}
                 />
-                <Route path='about' element={<AboutPage />} />
+                <Route path='Search' element={<SearchPage />} />
                 <Route
                   path='*'
                   element={<Navigate to='/characters' />}

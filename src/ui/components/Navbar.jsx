@@ -33,12 +33,12 @@ export const Navbar = () => {
           Locations
         </NavLink>
         <NavLink
-          to='/about'
+          to='/search'
           className={({ isActive }) =>
             `${isActive ? 'font-bold' : ''}`
           }
         >
-          About
+          Search
         </NavLink>
       </div>
 

@@ -1,12 +1,14 @@
+import { ListItem } from './ListItem';
+
 export const ListLayout = ({ data, isLoading, hasError, error }) => {
   return (
-    <div className='list-layout'>
+    <div className='container mx-auto px-6 sm:px-0'>
       {isLoading ? (
         'Loading...'
       ) : (
-        <div className='row rows-cols-1 row-cols-md-3 g-3'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
           {data.results.map((item) => (
-            <p key={item.id}>{item?.name}</p>
+            <ListItem key={item.id} {...item} />
           ))}
         </div>
       )}

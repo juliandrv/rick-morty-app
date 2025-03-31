@@ -1,5 +1,5 @@
 import { useFetch } from '../../hooks/useFetch';
-import { ListLayout } from '../../ui/components/ListLayout';
+import { ListLayout } from '../components/ListLayout';
 
 export const LocationListPage = () => {
   const { data, isLoading, hasError, error } = useFetch(
@@ -7,9 +7,10 @@ export const LocationListPage = () => {
   );
 
   return (
-    <>
-      <h1>Locations</h1>
-      <hr />
+    <section className='container mx-auto px-4'>
+      <h1 className='text-center font-bold text-3xl my-8'>
+        Locations
+      </h1>
 
       <ListLayout
         data={data}
@@ -17,6 +18,6 @@ export const LocationListPage = () => {
         hasError={hasError}
         error={error}
       />
-    </>
+    </section>
   );
 };
