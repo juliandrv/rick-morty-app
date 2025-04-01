@@ -1,21 +1,26 @@
+import { useContext } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router';
+import { AuthContext } from '../../auth/context/AuthContext';
 
 export const Navbar = () => {
+  const { user, logged, onLogout } = useContext(AuthContext);
+
   const navitage = useNavigate();
 
   const handleLogout = () => {
+    onLogout();
     navitage('/login', { replace: true });
   };
 
   return (
     <div className='navbar bg-base-100 shadow-sm px-8'>
       <div className='navbar-start '>
-        <Link to='/' className='text-xl font-bold'>
+        <Link to='/characters' className='text-xl font-bold'>
           Morty&Rick
         </Link>
       </div>
 
-      <div className='flex navbar-end gap-6 '>
+      <div className='flex navbar-center gap-6 '>
         <NavLink
           to='/characters'
           className={({ isActive }) =>
@@ -43,15 +48,16 @@ export const Navbar = () => {
         </NavLink>
       </div>
 
-      {/* <div className='navbar-end flex items-center gap-4 '>
-        <NavLink to='/login' className='btn btn-primary'>
-          Login
-        </NavLink>
-        <span className='text-blue-400'>Julián</span>
-        <button onClick={handleLogout} className='btn btn-ghost'>
+      <div className='navbar-end flex items-center gap-4 '>
+        <span className='text-amber-400'>{user?.name}</span>
+
+        <button
+          onClick={handleLogout}
+          className='btn btn-primary btn-outline'
+        >
           Logout
         </button>
-      </div> */}
+      </div>
     </div>
   );
 };

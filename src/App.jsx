@@ -1,11 +1,10 @@
+import { AuthProvider } from './auth/context/AuthProvider';
 import { AppRouter } from './router/AppRouter';
-import { Footer } from './ui/components/Footer';
 
 export const App = () => {
   return (
-    <>
+    <AuthProvider>
       <AppRouter />
-      <Footer />
-    </>
+    </AuthProvider>
   );
 };
